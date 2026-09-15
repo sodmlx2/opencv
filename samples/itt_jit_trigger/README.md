@@ -2,6 +2,8 @@
 
 Este documento descreve detalhadamente tudo o que foi implementado, como os objetos e binários são gerados, como o teste determinístico funciona e como executar a validação da vulnerabilidade **CWE-427** (*Uncontrolled Search Path Element* / carregamento de DLL não confiável via variável de ambiente) no módulo `jitprofiling.c` do OpenCV.
 
+> Para a análise técnica profunda sobre a flag do Windows `LOAD_WITH_ALTERED_SEARCH_PATH`, o fluxo de troca da DLL e as diretrizes de segurança da Microsoft, consulte o documento dedicado: **[SECURITY.md](SECURITY.md)**.
+
 ---
 
 ## 1. Resumo do Vetor de Vulnerabilidade (CWE-427)

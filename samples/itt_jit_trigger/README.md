@@ -1,4 +1,4 @@
-# PoC e Validação de CWE-427 (JIT Profiling Intel ITT no OpenCV).
+# PoC CWE-427 (JIT Profiling Intel ITT no OpenCV).
 
 Este documento descreve detalhadamente tudo o que foi implementado, como os objetos e binários são gerados, como o teste determinístico funciona e como executar a validação da vulnerabilidade **CWE-427** (*Uncontrolled Search Path Element* / carregamento de DLL não confiável via variável de ambiente) no módulo `jitprofiling.c` do OpenCV.
 

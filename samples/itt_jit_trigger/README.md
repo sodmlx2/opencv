@@ -1,4 +1,4 @@
-# Guia Completo: PoC e Validação de CWE-427 (JIT Profiling Intel ITT no OpenCV)
+# PoC e Validação de CWE-427 (JIT Profiling Intel ITT no OpenCV).
 
 Este documento descreve detalhadamente tudo o que foi implementado, como os objetos e binários são gerados, como o teste determinístico funciona e como executar a validação da vulnerabilidade **CWE-427** (*Uncontrolled Search Path Element* / carregamento de DLL não confiável via variável de ambiente) no módulo `jitprofiling.c` do OpenCV.
 
@@ -205,50 +205,7 @@ cd c:\Users\marco\source\repos\opencv\samples\itt_jit_trigger
 run_test.bat
 ```
 
-### Saída Real do Teste Obtida no Ambiente:
-
-```text
-=======================================================
-TESTE 1: Baseline (sem variavel de ambiente)
-=======================================================
-=== Disparando eventos ITT/JIT Profiling ===
-[1] METHOD_LOAD_FINISHED disparado. Retorno: 0
-[2] METHOD_LOAD_FINISHED (com dados) disparado. Retorno: 0
-[3] METHOD_LOAD_FINISHED_V2 disparado. Retorno: 0
-[4] METHOD_UNLOAD_START disparado. Retorno: 0
-[5] iJIT_IsProfilingActive() retornou: 0
-[6] SHUTDOWN disparado. Retorno: 0
-=== Fim dos disparos. Verifique se a lib externa foi carregada. ===
-OpenCV Mat criado com sucesso: [10 x 10]
-[OK] Nenhuma DLL externa foi carregada. Retornos foram 0 conforme esperado.
-
-=======================================================
-TESTE 2: Com variavel de ambiente (apontando para poc_dll.dll)
-=======================================================
-Definindo INTEL_JIT_PROFILER64=c:\Users\marco\source\repos\opencv\samples\itt_jit_trigger\poc_dll.dll
-=== Disparando eventos ITT/JIT Profiling ===
-[1] METHOD_LOAD_FINISHED disparado. Retorno: 1
-[2] METHOD_LOAD_FINISHED (com dados) disparado. Retorno: 1
-[3] METHOD_LOAD_FINISHED_V2 disparado. Retorno: 1
-[4] METHOD_UNLOAD_START disparado. Retorno: 1
-[5] iJIT_IsProfilingActive() retornou: 1
-[6] SHUTDOWN disparado. Retorno: 1
-=== Fim dos disparos. Verifique se a lib externa foi carregada. ===
-OpenCV Mat criado com sucesso: [10 x 10]
-
-=======================================================
-VERIFICACAO DA PROVA:
-=======================================================
-[CONFIRMADO] A DLL externa foi carregada com sucesso pelo executavel!
-Conteudo do arquivo de prova:
-[POC INJECTION PROOF] Lib carregada com sucesso! Chamador: DllMain(DLL_PROCESS_ATTACH) | Horario: Mon Sep 14 23:58:19 2026
-[POC INJECTION PROOF] Lib carregada com sucesso! Chamador: Initialize() | Horario: Mon Sep 14 23:58:19 2026
-```
-
----
-
-## 7. Como Interpretar a Prova
-
+## 7. Debugging.
 1. **No Teste 1 (Baseline)**:
    - A variável `INTEL_JIT_PROFILER64` não está definida.
    - `loadiJIT_Funcs()` falha silenciosamente ao não encontrar o agente.

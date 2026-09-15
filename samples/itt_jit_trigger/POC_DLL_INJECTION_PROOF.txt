@@ -1,0 +1,2 @@
+[POC INJECTION PROOF] Lib carregada com sucesso! Chamador: DllMain(DLL_PROCESS_ATTACH) | Horario: Tue Sep 15 02:41:52 2026
+[POC INJECTION PROOF] Lib carregada com sucesso! Chamador: Initialize() | Horario: Tue Sep 15 02:41:52 2026

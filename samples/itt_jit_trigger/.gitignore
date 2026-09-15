@@ -1,0 +1,13 @@
+# Binarios compilados e pastas de build/saida
+bin/
+out/
+.vs/
+*.obj
+*.exe
+*.dll
+*.lib
+*.exp
+*.code-workspace
+
+# Prova gerada em runtime pelo teste de injecao
+POC_DLL_INJECTION_PROOF.txt

@@ -1,4 +1,4 @@
-# PoC CWE-427 (JIT Profiling Intel ITT no OpenCV).
+# PoC (JIT Profiling Intel ITT).
 
 Este documento descreve detalhadamente tudo o que foi implementado, como os objetos e binários são gerados, como o teste determinístico funciona e como executar a validação da vulnerabilidade **CWE-427** (*Uncontrolled Search Path Element* / carregamento de DLL não confiável via variável de ambiente) no módulo `jitprofiling.c` do OpenCV.
 
@@ -77,7 +77,7 @@ opencv/
 ## 4. Como Funcionam os Componentes do Teste
 
 ### 4.1. O Executável: `itt_jit_trigger.cpp`
-Diferente de testes heurísticos que tentam acionar profiling indiretamente através de filtros de imagem, este sample chama **diretamente** as APIs públicas do ITT JIT. Isso garante 100% de reproducibilidade:
+Diferente de testes heurísticos que tentam acionar profiling indiretamente através de filtros de imagem, este sample chama **diretamente** as APIs públicas do ITT JIT.
 
 * **Evento 1 (`METHOD_LOAD_FINISHED` com `iJIT_Method_Load`)**:
   - Primeira chamada que aciona o `loadiJIT_Funcs()`.
